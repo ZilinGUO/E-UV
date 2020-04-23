@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping >
+    <class name="com.rmc.po.Post" table="t_post" discriminator-value="2">
+        <id name="postId" column="id">
+            <generator class="identity" />
+        </id>
+        <property name="postName" column="post_name" />
+        <property name="content" column="content" />
+    </class>
+</hibernate-mapping>
