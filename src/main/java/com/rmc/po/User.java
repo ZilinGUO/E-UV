@@ -13,13 +13,26 @@ public class User extends BasePO {
     @Column(name = "id")
     private int userId;
 
-    @Id
+
     @Column(name = "user_name")
     private String userName;
 
-    @Id
+
     @Column(name = "password")
     private String passWord;
+
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+
+
+    @Column(name = "role")
+    private int role;
 
     public int getUserId() {
         return userId;
@@ -43,5 +56,12 @@ public class User extends BasePO {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }

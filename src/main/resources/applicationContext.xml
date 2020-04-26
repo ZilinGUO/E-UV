@@ -47,6 +47,8 @@
                 <prop key="hibernate.cache.use_query_cache">false</prop>
             </props>
         </property>
+
+
     </bean>
 
     <!--定义HibernateTemplate -->

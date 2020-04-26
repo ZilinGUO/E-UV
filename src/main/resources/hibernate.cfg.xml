@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 指定Hibernate配置文件的DTD信息 -->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!-- 配置主配置文件-->
+<hibernate-configuration>
+    <session-factory>
+        <!-- 指定数据库方言，用这个可以切换连接不同的数据库 -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <!-- 连接数据库 -->
+        <!-- 驱动，url，用户名和密码 -->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/myapp</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password"></property>
+
+        <!-- 显示Hibernate持久层操作所使用的SQL -->
+        <property name="show_sql">true</property>
+        <!-- 将脚本格式化后再进行输出 -->
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- 设置Mapping映射资源文件位置 -->
+        <mapping  class="com.rmc.po.Project"/> <!--映射文件 -->
+        <mapping class="com.rmc.po.Subject"/> <!--映射文件 -->
+        <mapping class="com.rmc.po.User"/> <!--映射文件 -->
+
+
+    </session-factory>
+</hibernate-configuration>

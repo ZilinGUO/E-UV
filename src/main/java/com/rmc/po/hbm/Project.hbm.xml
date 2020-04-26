@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.rmc.po.Project" table="t_project" >
+        <id name="projectId" column="projectId">
+            <generator class="identity" />
+        </id>
+        <property name="description" column="description" />
+        <property name="projectName" column="project_name" />
+        <property name="dateStart" column="create_time"/>
+        <set name="projectId" table="t_subject" lazy="false" inverse="true" cascade="delete" sort="unsorted">
+            <key column="projectId"/>
+            <one-to-many class="com.rmc.po.Subject"/>
+        </set>
+    </class>
+</hibernate-mapping>

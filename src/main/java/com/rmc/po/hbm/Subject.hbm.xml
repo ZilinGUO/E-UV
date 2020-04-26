@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.rmc.po.Subject" table="t_user" >
+        <id name="subjectId" column="subjectId">
+            <generator class="identity" />
+        </id>
+        <property name="subjectName" column="subjectName" />
+        <property name="description" column="description" />
+        <!--        <many-to-one column="projectId" name="t_project" unique="true"/>-->
+        <many-to-one name="project" class="com.rmc.po.Project" cascade="none" outer-join="auto" column="projectId"/>
+    </class>
+</hibernate-mapping>

@@ -15,7 +15,7 @@
 <c:if test="${!empty errorMsg}">
     <div style="color:red">${errorMsg}</div>
 </c:if>
-<form action="${context}/login/doLogin.html" method="post">
+<form action="${context}/Uesr/toLogin.do" method="post">
     <table border="1px">
         <tr>
             <td width="20%">用户名</td>

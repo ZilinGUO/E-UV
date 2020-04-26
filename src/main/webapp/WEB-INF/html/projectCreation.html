@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>projectCreation</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+<script>
+
+    function create() {
+        var project = new Array();
+        project.push($(".projectName").val());
+        project.push($(".description").val());
+        var json = {
+            "projectName" : $(".projectName").val(),
+            "description" : $(".description").val()
+        };
+        $.ajax({
+            type:"POST",
+            url:"http://localhost:8080/simpleforum/Project/createProject.do",
+            data:json,
+            // data : JSON.stringify(json),
+            // contentType : "application/json",
+            dataType:"json",
+            success:function(result) {
+                window.location.href="http://localhost:8080/simpleforum/Project/project.do";
+            },
+            error:function(result) {
+            }
+        });
+    }
+</script>     
+<body>
+<div><text>projectCreation</text></div>
+<div>
+    <p>projectName </p>
+    <input class="projectName" type="text" name="" >
+</div>
+<div>
+    <p>description</p>
+    <textarea name="description" id="" cols="30" rows="10" class="description"></textarea>
+</div>
+<input type="button" onclick="create();" value="submit"/>
+
+</body>
+</html>

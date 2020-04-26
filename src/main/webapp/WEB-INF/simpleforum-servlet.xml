@@ -14,9 +14,30 @@
 
     <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
     <mvc:annotation-driven/>
+    <mvc:resources mapping="js/**" location="/WEB-INF/html/"></mvc:resources>
 
     <!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--<property name="viewClass"
+            value="org.springframework.web.servlet.view.JstlView" />-->
+        <property name="viewClass"
+                  value="com.rmc.base.HtmlResourceView" />
+        <!-- 通过setter方法注入前缀 /WEB-INF/views/showMsg.jsp-->
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <!-- 通过setter方法注入后缀 -->
+        <property name="suffix" value=".jsp" />
+
+        <property name="order" value="1" />
+    </bean>
+
+    <bean id="htmlviewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="com.rmc.base.HtmlResourceView"/>
+        <property name="order" value="0" />
+        <property name="prefix" value="/WEB-INF/html/"/>
+        <property name="suffix" value=".html" />
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+    </bean>
 
 </beans>

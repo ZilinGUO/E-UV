@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+<script>$(window).load(function(){
+    var table=$("#GroupTable");
+    var str="";//定义用于拼接的字符串
+    $.ajax({
+        url: "http://localhost:8080/simpleforum/Subject/showSubjectLists.do",
+        type: "post",
+        async: false,//是否异步请求
+        success: function (data) {
+            var tbody = '';
+            table.children('tbody').empty();
+            for (var i = 0; i < data.length; i++) {
+                var tr = '';
+                tr +='<tr>'
+                tr += '<td><input type="checkbox"></td>'
+                tr += '<td class="id">' + data[i].subjectId + '</td>';
+                tr += '<td>' + data[i].subjectName + '</td>';
+                tr += '<td>' + data[i].description + '</td>';
+                tr += '</tr>';
+                table.children('tbody').append(tr);
+            }
+            //  tbody += tr;
+            //  table.children('tbody').empty();
+            //显示数据
+            table.children('tbody').addClass('sel');
+            table.children('tbody.sel').children('tr').click(function (event) {//点击行事件
+                $(this).toggleClass('active');//增加选中效果
+            });
+            $(".id").hide();
+            /*这个方法里是ajax发送请求成功之后执行的代码*/
+            // for (var i = 0; i < data.length; i++) {
+            //     str+="<div>"+data[i].projectName+"</div>";
+            //     str+="<div>"+data[i].description+"</div>";
+            // }
+            // //追加到div中
+            // $(".pp").append(str);
+
+        }
+
+    })
+
+
+
+});
+function SelectProject(){
+    var selects=$('#GroupTable').children('tbody').children('tr.active');
+    var ids=new Array();
+    selects.each(function(index, el) {
+        if(index==1){
+            alert("select one project");
+            return;
+        }
+        ids[index]=el.cells[1].innerHTML;
+    });
+    console.log(ids);
+    window.location.href="http://localhost:8080/simpleforum/Subject/subjectPage.do?ProjectId="+ids;
+
+}
+function createProject() {
+    window.location.href="http://localhost:8080/simpleforum/Project/CreatePage.do";
+}
+</script>
+<body>
+<input type="button" onclick="SelectSubject();" value="Enter the project"/>
+<input type="button" onclick="createSubject();" value="create new project"/>
+<table class="table" id="GroupTable" >
+    <thead>
+    <tr>
+        <th data-type="CheckBox"></th>
+        <th class="id" data-field="subjectId">subjectId</th>
+        <th data-field="subjectName">subjectName</th>
+        <th data-field="description">description</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+</body>
+</html>
