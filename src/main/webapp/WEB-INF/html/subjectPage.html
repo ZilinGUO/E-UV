@@ -9,10 +9,15 @@
 <script>$(window).load(function(){
     var table=$("#GroupTable");
     var str="";//定义用于拼接的字符串
+    var projectId=$.getUrlParam('ProjectId');
+    var json = {
+        "projectId" : projectId
+    };
     $.ajax({
         url: "http://localhost:8080/simpleforum/Subject/showSubjectLists.do",
         type: "post",
         async: false,//是否异步请求
+        data:json,
         success: function (data) {
             var tbody = '';
             table.children('tbody').empty();
@@ -49,6 +54,13 @@
 
 
 });
+$.getUrlParam = function (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");//构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);//匹配目标参数
+    if (r != null) return unescape(r[2]);
+    return null;//返回参数值
+}
+
 function SelectProject(){
     var selects=$('#GroupTable').children('tbody').children('tr.active');
     var ids=new Array();

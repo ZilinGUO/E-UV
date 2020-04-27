@@ -7,13 +7,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/Subject")
@@ -37,10 +40,9 @@ public class SubjectController {
     }
     @RequestMapping("/showSubjectLists.do")
     @ResponseBody
-    public List<Subject> showSubjectLists (HttpServletRequest request,
-                                           HttpServletResponse response) throws Exception {
+    public List<Subject> showSubjectLists (@RequestParam Map<String, Object> map) throws Exception {
         try {
-            List<Subject> subjectLists= subjectService.getAllSubjects((Integer) request.getSession().getAttribute("projectID"));
+            List<Subject> subjectLists= subjectService.getAllSubjects(Integer.parseInt(map.get("projectId").toString()));
             System.out.println(subjectLists);
             return subjectLists;
         }   catch (Exception e) {
